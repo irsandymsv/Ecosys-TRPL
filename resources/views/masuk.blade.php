@@ -20,7 +20,7 @@
 		.container{
 			/*background-color: rgba(140, 210, 42, 0.5);*/
 			/*background-color: rgba(240, 240, 240, 0.5);*/
-			background-color: rgba(0, 0, 0, 0.5);
+			background-color: rgba(0, 0, 0, 0.6);
 			width: 400px;
 			min-height: 340px;
 			/*border: 1px ;*/
@@ -57,10 +57,10 @@
     		<form class="forms" method="POST" action="{{ route('login') }}">
     		<h1 style="color: rgb(255, 255, 26); font-family: Helvetica;">Log In</h1><br>
     		<div class="form-group">
-    			<input class="form-control" type="text" name="nama" value="{{ old('nama') }}" placeholder="Username">
-					<?php if ($errors->has('nama')): ?>
+    			<input class="form-control" type="text" name="username" value="{{ old('username') }}" placeholder="Username">
+					<?php if ($errors->has('username')): ?>
 						<div class="alert alert-danger" role="alert" style="padding: 1px;">
-							{{ $errors->first('nama') }}
+							{{ $errors->first('username') }}
 						</div>
 					<?php endif ?>
     		</div>

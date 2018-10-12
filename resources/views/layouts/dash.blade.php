@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    @yield('meta')
     <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('/fontAwe/css/all.css')}}" rel="stylesheet">
     @yield('link ref')
@@ -81,6 +82,12 @@
         color: rgb(255, 255, 77);
       }
 
+      .badge{
+        margin-left: 15px;
+        background-color: rgb(255, 71, 26);
+        font-size: 16px;
+      }
+
       @yield('gaya')
 
     </style>
@@ -121,7 +128,26 @@
             </div>
 
             <div class="side-bawah">
-              @yield('side-bawah')
+              <p style="font-size: 18px;">MENU</p>
+              <a href="@yield('beranda')" style="font-size: 20px;"><span class="glyphicon glyphicon-home" style="margin-right: 20px; color: rgb(
+              255, 204, 0);"></span>Beranda</a>
+
+              <a href="@yield('pengumuman')" style="font-size: 20px;"><span class="glyphicon glyphicon-bullhorn" style="margin-right: 20px; color: rgb(
+              255, 204, 0);"></span>  pengumuman 
+                  <?php if (Auth()->User()->unreadNotifications->isEmpty()): ?>
+                    <span class="badge"></span>
+                  <?php else: ?>
+                    <span class="badge">{{Auth()->User()->unreadNotifications->count()}}</span>
+                  <?php endif ?>
+              </a>
+
+              <a href="@yield('laporan')" style="font-size: 20px;"><span class="glyphicon glyphicon-list-alt" style="margin-right: 20px; color: rgb(
+              255, 204, 0);"></span>  Laporan</a>
+
+              <a href="@yield('statistika')" style="font-size: 20px;"><span class="glyphicon glyphicon-stats" style="margin-right: 20px; color: rgb(
+              255, 204, 0);"></span>  Statistika</a>
+              
+              @yield('data profil')
             </div>
 
         </div>

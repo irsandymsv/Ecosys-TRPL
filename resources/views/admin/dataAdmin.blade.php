@@ -1,4 +1,4 @@
-@extends ('layouts.dash')
+@extends ('layouts.admin')
 
 @section('link ref')
 	<!-- <link rel="stylesheet" type="text/css" href="{{asset('/DataTables/datatables.min.css')}}"/> -->
@@ -41,24 +41,15 @@
 	{{$role->nama_role}}
 @endsection
 
-@section('side-bawah')
-	<p style="font-size: 18px;">MENU</p>
-	<a href="/admin/{{$ad->id}}" style="font-size: 20px;"><span class="glyphicon glyphicon-home" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>Beranda</a>
+<!-- @section('beranda') /admin/{{$ad->id}} @endsection
+@section('pengumuman') /admin/{{$ad->id}}/pengumuman @endsection
+@section('laporan') # @endsection
+@section('statistika') # @endsection
 
-	<a href="#" style="font-size: 20px;"><span class="glyphicon glyphicon-bullhorn" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>	Pengumuman</a>
-
-	<a href="#" style="font-size: 20px;"><span class="glyphicon glyphicon-list-alt" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>	Laporan</a>
-
-	<a href="#" style="font-size: 20px;"><span class="glyphicon glyphicon-stats" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>	Statistika</a>
-
+@section('data profil')
 	<a href="/admin/{{$ad->id}}/data" style="font-size: 20px;"><span class="fas fa-users" style="margin-right: 20px; color: rgb(
 	255, 204, 0);"></span>Data Pengguna</a>
-	
-@endsection
+@endsection -->
 
 @section('isi1')
 	<div class="nav">

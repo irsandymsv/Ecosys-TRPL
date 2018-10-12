@@ -1,4 +1,4 @@
-@extends ('layouts.dash')
+@extends ('layouts.admin')
 
 @section('judul')
 	Ecosys-Buat Data Pengguna
@@ -16,11 +16,12 @@
 
 	.nav{
 		padding: 15px;
-		padding-top: 0;
+		<!-- padding-top: 0; -->
 	}
 
 	.row1{
 		padding: 10px;
+		padding-top: 0;
 		<!-- text-align: center; -->
 	}
 
@@ -30,7 +31,7 @@
 		background-color: white; 
 		padding: 15px;
 		margin-left: 15px;
-		min-height: 575px;
+		min-height: 645px;
 	}
 
 	.r2{
@@ -39,7 +40,7 @@
 		background-color: white; 
 		padding: 15px;
 		margin-left: 15px;
-		min-height: 575px;
+		min-height: 645px;
 
 	}
 
@@ -62,26 +63,24 @@
 	{{$role->nama_role}}
 @endsection
 
-@section('side-bawah')
-	<p style="font-size: 18px;">MENU</p>
-	<a href="/admin/{{$ad->id}}" style="font-size: 20px;"><span class="glyphicon glyphicon-home" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>Beranda</a>
+<!-- @section('beranda') /admin/{{$ad->id}} @endsection
+@section('pengumuman') /admin/{{$ad->id}}/pengumuman @endsection
+@section('laporan') # @endsection
+@section('statistika') # @endsection
 
-	<a href="#" style="font-size: 20px;"><span class="glyphicon glyphicon-bullhorn" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>	Pengumuman</a>
-
-	<a href="#" style="font-size: 20px;"><span class="glyphicon glyphicon-list-alt" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>	Laporan</a>
-
-	<a href="#" style="font-size: 20px;"><span class="glyphicon glyphicon-stats" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>	Statistika</a>
-
+@section('data profil')
 	<a href="/admin/{{$ad->id}}/data" style="font-size: 20px;"><span class="fas fa-users" style="margin-right: 20px; color: rgb(
 	255, 204, 0);"></span>Data Pengguna</a>
-	
-@endsection
+@endsection -->
 
 @section('isi1')
+	<div class="nav">
+		<ol class="breadcrumb">
+		  <li ><a href="/admin/{{$ad->id}}/data">Data Pengguna</a></a></li>
+		  <li class="active">Buat User Baru</li>
+		</ol>	
+	</div>
+
 	<div class="row1">
 		<form method="POST" action="/admin/{{$ad->id}}/data/baru">
 			{{csrf_field()}}
@@ -185,13 +184,13 @@
 							{{$errors->first('alamat_tinggal') }}
 						</div>
 					<?php endif ?>
-				</div>
+				</div>				
 
 			</div>
 
 			<div class="r2">
 				<div style="margin-bottom: 40px;">
-					<h3 ></h3>
+					<!-- <h3 ></h3> -->
 				</div>
 
 				<div class="form-group">
@@ -245,6 +244,16 @@
 				</div>
 
 				<div class="form-group">
+					<label>Username</label>
+					<input class="form-control" type="text" name="username" id="username" value="{{old('username')}}">
+					<?php if ($errors->has('username')): ?>
+						<div class="alert alert-danger" role="alert" style="padding: 2px;">
+							{{$errors->first('username') }}
+						</div>
+					<?php endif ?>
+				</div>
+
+				<div class="form-group">
 					<label for="password">Password</label>
 					<div class="input-group">
 						<input type="password" class="form-control" name="password" id="password">
@@ -273,7 +282,7 @@
 						</div>
 					<?php endif ?>
 				</div>
-				<!-- <br> -->
+				<br>
 
 				<div class="form-inline" style="text-align: right;">
 					<a href="/admin/{{$ad->id}}/data" class="btn btn-default db" type="button">Batal</a>
@@ -297,8 +306,8 @@
 				      </div>
 
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-				        <button class="btn btn-success" type="submit" name="submit">Simpan</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+				        <button class="btn btn-success" type="submit" name="submit" style="padding: 5px 20px;">Ya</button>
 				      </div>
 				    </div>
 
@@ -319,6 +328,31 @@
 	function hidePass () {
 		document.getElementById("password").type = "password";
 	}
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#nama').keypress(function(event) {
+			var keyCode = event.which;
+			if (!( (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) ) && keyCode != 8 && keyCode != 32) {
+				return false;
+			}
+		});
+
+		$('#alamat_tinggal').keypress(function(event) {
+			var keyCode = event.which;
+			if (!((keyCode>=48 && keyCode<=57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode == 46 ) && keyCode != 8 && keyCode != 32) {
+				return false;
+			}
+		});
+
+		$('#alamat_asal').keypress(function(event) {
+			var keyCode = event.which;
+			if (!((keyCode>=48 && keyCode<=57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode == 46 ) && keyCode != 8 && keyCode != 32) {
+				return false;
+			}
+		});
+	});
 </script>
 	
 @endsection

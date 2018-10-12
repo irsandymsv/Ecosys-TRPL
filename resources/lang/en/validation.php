@@ -131,6 +131,13 @@ return [
         'nama'          =>[
             'required'  =>  'Harap isi kolom nama',
             'max'       =>  'Maksimal 50 karakter',
+            'regex'     =>  'Harap hanya masukkan abjad',
+        ],
+        'username'      =>[
+            'required'  =>  'Harap isi kolom username',
+            'unique'    =>  'username sudah ada, mohon gunakan username lain',
+            'alpha_dash'=>  'Harap tidak menggunakan spasi dan simbol',
+            'max'       =>  'maksimal 30 karakter',
         ],
         'email'         =>[
             'required'  =>  'Harap isi kolom email',
@@ -140,7 +147,8 @@ return [
         ],
         'password'      =>[
             'required'  =>  'Harap isi kolom password',
-            'min'       =>  'Minimal 6 karakter untuk password'
+            'min'       =>  'Minimal 6 karakter untuk password',
+            'regex'     =>  'password harus terdiri dari huruf besar kecl dan angka'
         ],
         'jenis_kelamin' =>[
             'required'  =>  'Harap pilih jenis kelamin',
@@ -148,6 +156,8 @@ return [
         'alamat_asal'   => [
             'required'  =>  'Harap isi kolom alamat asal',
             'max'       =>  'Maksimal 100 karakter',
+            'min'       =>  'Minimal 5 karakter',
+            'not_regex' =>  'Harap tidak menggunakan simbol seperti ?>@!# dsb'
         ],
         'id_prov_asal'  =>[
             'required'  =>  'Harap pilih provinsi asal',
@@ -158,15 +168,17 @@ return [
         'alamat_tinggal'    =>[
             'required'      =>  'Harap isi kolom alamat tinggal',
             'max'           =>  'Maksimal 100 karakter',
+            'min'           =>  'Minimal 5 karakter',
+            
         ],
         'profesi_id'    =>[
             'required'  =>  'Harap pilih profesi',
         ],
         'tempat_lahir'  =>[
             'required'  => 'Harap isi kolom tempat lahir',
-            'string'    => 'Harap hanya masukkan abjad',
+            'alpha'     => 'Harap hanya masukkan abjad',
             'max'       => 'Maksimal 20 karakter',
-            'regex'     =>  'Harap hanya masukkan abjad'
+            'regex'     => 'Harap hanya masukkan abjad'
         ],
         'tanggal_lahir' =>[
             'required'  => 'Harap pilih tanggal lahir',
@@ -175,6 +187,7 @@ return [
             'required'  =>  'Harap isi kolom nomor HP',
             // 'numeric'   =>  'Harap hanya masukkan angka',
             'digits_between'    =>  'Harap hanya masukkan angka, maksimal 12 digit',
+            'unique'    =>  'Nomor telah terdaftar, mohon masukkan nomor lain',
         ],
         'nik'           =>[
             'required'  =>  'Harap isi kolom NIK',

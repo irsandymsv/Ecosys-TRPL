@@ -1,4 +1,4 @@
-@extends ('layouts.dash')
+@extends ('layouts.admin')
 
 @section('judul')
 	Ecosys-Ubah Data Pengguna
@@ -16,11 +16,12 @@
 
 	.nav{
 		padding: 15px;
-		padding-top: 0;
+		<!-- padding-top: 0; -->
 	}
 
 	.row1{
 		padding: 10px;
+		padding-top: 0px;
 		<!-- text-align: center; -->
 	}
 
@@ -62,33 +63,33 @@
 	{{$role->nama_role}}
 @endsection
 
-@section('side-bawah')
-	<p style="font-size: 18px;">MENU</p>
-	<a href="/admin/{{$ad->id}}" style="font-size: 20px;"><span class="glyphicon glyphicon-home" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>Beranda</a>
+<!-- @section('beranda') /admin/{{$ad->id}} @endsection
+@section('pengumuman') /admin/{{$ad->id}}/pengumuman @endsection
+@section('laporan') # @endsection
+@section('statistika') # @endsection
 
-	<a href="#" style="font-size: 20px;"><span class="glyphicon glyphicon-bullhorn" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>	Pengumuman</a>
-
-	<a href="#" style="font-size: 20px;"><span class="glyphicon glyphicon-list-alt" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>	Laporan</a>
-
-	<a href="#" style="font-size: 20px;"><span class="glyphicon glyphicon-stats" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>	Statistika</a>
-
+@section('data profil')
 	<a href="/admin/{{$ad->id}}/data" style="font-size: 20px;"><span class="fas fa-users" style="margin-right: 20px; color: rgb(
 	255, 204, 0);"></span>Data Pengguna</a>
-	
-@endsection
+@endsection -->
 
 @section('isi1')
+	<div class="nav">
+		<ol class="breadcrumb" style="background-color: white;">
+		  <li><a href="/admin/{{$ad->id}}/data">Data Pengguna</a></a></li>
+		  <!-- <li><a href="/admin/{{$ad->id}}/data/arahkan/{{$user->id}}">Detail Pengguna</a></li> -->
+		  <li class="active">Ubah Data</li>
+		</ol>	
+	</div>
+
 	<div class="row1">
+
 		<form method="POST" action="/admin/{{$ad->id}}/data/update/{{$user->id}}">
 			{{csrf_field()}}
 
 			<div class="r1">
 				<div>
-					<h3 style="text-align: center; margin-top: 0px; margin-bottom: 15px;">Buat Data Pengguna</h3>
+					<h3 style="text-align: center; margin-top: 0px; margin-bottom: 15px;">Ubah Data Pengguna</h3>
 				</div>
 				<!-- <br> -->
 				<div class="form-group">
@@ -254,6 +255,16 @@
 					<?php endif ?>
 				</div>
 
+				<div class="form-group">
+					<label>Username</label>
+					<input class="form-control" type="text" name="username" id="username" value="{{($user->username)}}">
+					<?php if ($errors->has('username')): ?>
+						<div class="alert alert-danger" role="alert" style="padding: 2px;">
+							{{$errors->first('username') }}
+						</div>
+					<?php endif ?>
+				</div>
+
 				<!-- <div class="form-group">
 					<label for="password">Password Baru</label>
 					<div class="input-group">
@@ -288,8 +299,9 @@
 				<!-- <br> -->
 
 				<div class="form-inline" style="text-align: right;">
-					<a href="/admin/{{$ad->id}}/data/arahkan/{{$user->id}}" class="btn btn-default db" type="button">Batal</a>
+					<a href="/admin/{{$ad->id}}/data" class="btn btn-default db" type="button">Batal</a>
 					<button class="btn btn-success" type="button" data-toggle="modal" data-target="#myModal">Simpan</button>
+					<a href="/admin/{{$ad->id}}/data/edit/password/{{$user->id}}" class="btn btn-warning" role="button">Ubah Password</a>
 				</div>
 
 			</div>
@@ -309,8 +321,9 @@
 				      </div>
 
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-				        <button class="btn btn-success" type="submit" name="submit">Simpan</button>
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+
+				        <button class="btn btn-success" type="submit" name="submit">Ya</button>
 				      </div>
 				    </div>
 
@@ -332,6 +345,31 @@
 	function hidePass () {
 		document.getElementById("password").type = "password";
 	}
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#nama').keypress(function(event) {
+			var keyCode = event.which;
+			if (!( (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) ) && keyCode != 8 && keyCode != 32) {
+				return false;
+			}
+		});
+
+		$('#alamat_tinggal').keypress(function(event) {
+			var keyCode = event.which;
+			if (!((keyCode>=48 && keyCode<=57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode == 46 ) && keyCode != 8 && keyCode != 32) {
+				return false;
+			}
+		});
+		
+		$('#alamat_asal').keypress(function(event) {
+			var keyCode = event.which;
+			if (!((keyCode>=48 && keyCode<=57) || (keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122) || keyCode == 46 ) && keyCode != 8 && keyCode != 32) {
+				return false;
+			}
+		});
+	});
 </script>
 	
 @endsection

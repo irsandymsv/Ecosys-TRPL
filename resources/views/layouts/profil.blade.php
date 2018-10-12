@@ -5,9 +5,6 @@
 @endsection
 
 @section('gaya')
-	<!-- .buatBaru{
-		margin-top: 240px;
-	} -->
 
 	.btn.btn-success.btn-lg{
 		color: black;
@@ -29,7 +26,7 @@
 		background-color: white; 
 		padding: 15px;
 		margin-left: 15px;
-		min-height: 575px;
+		min-height: 720px;
 	}
 
 	.r2{
@@ -38,18 +35,14 @@
 		background-color: white; 
 		padding: 15px;
 		margin-left: 15px;
-		min-height: 575px;
+		min-height: 720px;
 
 	}
 
-<!-- 	.btn.btn-default.db{
-		background-color: rgb(200,200,200);
-		margin-right: 5px;
+	.val{
+		font-size: 18px;
 	}
-
-	.btn.btn-default.db:hover{
-		background-color: rgb(180,180,180);
-	} -->
+	
 @endsection
 
 @section('nama-user')
@@ -60,7 +53,7 @@
 	{{$role->nama_role}}
 @endsection
 
-@section('side-bawah')
+<!-- @section('side-bawah')
 	<p style="font-size: 18px;">MENU</p>
 	<a href="/perdes/{{$us->id}}" style="font-size: 20px;"><span class="glyphicon glyphicon-home" style="margin-right: 20px; color: rgb(
 	255, 204, 0);"></span>Beranda</a>
@@ -77,7 +70,7 @@
 	<a href="/perdes/{{$us->id}}/profil" style="font-size: 20px;"><span class="far fa-id-card" style="margin-right: 20px; color: rgb(
 	255, 204, 0);"></span>Profil</a>
 	
-@endsection
+@endsection -->
 
 @section('isi1')
 <div class="row1">
@@ -87,72 +80,67 @@
 				</div>
 				<!-- <br> -->
 				<div class="form-group">
-					<label for="nama">Nama Lengkap</label>
-					<input class="form-control" type="text" name="nama" id="nama" value="{{$us->nama}}" readonly>
-					
+					<label for="nama">Nama Lengkap</label><br>
+					<!-- <input class="form-control" type="text" name="nama" id="nama" value="{{$us->nama}}" readonly> -->
+					<p class="val">{{$us->nama}}</p>
+					<hr>
+
 				</div>
 				<div class="form-group">
-					<label for="nik">NIK</label>
-					<input class="form-control" type="text" name="nik" id="nik" value="{{$us->nik}}" readonly>
-					
+					<label for="nik">NIK</label><br>
+					<!-- <input class="form-control" type="text" name="nik" id="nik" value="{{$us->nik}}" readonly> -->
+					<p class="val">{{$us->nik}}</p>
+					<hr>
 				</div>
 
 				<div class="form-group">
 					<div class="row">
 						<div class="col-xs-6">
-							<label for="tempat_lahir">Tempat Lahir</label>
-							<input class="form-control" type="text" name="tempat_lahir" id="tempat_lahir" value="{{$us->tempat_lahir}}" readonly>
+							<label for="tempat_lahir">Tempat Lahir</label><br>
+							<!-- <input class="form-control" type="text" name="tempat_lahir" id="tempat_lahir" value="{{$us->tempat_lahir}}" readonly> -->
+							<p class="val">{{$us->tempat_lahir}}</p>
 
 						</div>
 
 						<div class="col-xs-6">
-							<label for="tanggal_lahir">Tanggal Lahir</label>
-							<input class="form-control" type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{$us->tanggal_lahir}}" readonly>
+							<label for="tanggal_lahir">Tanggal Lahir</label><br>
+							<!-- <input class="form-control" type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{$us->tanggal_lahir}}" readonly> -->
+							<p class="val">{{$us->tanggal_lahir}}</p>
 						</div>
 					</div>
+					<hr>
 				</div>
 				<div class="form-group">
 					<label for="gender">Jenis Kelamin</label><br>
-						<label class="radio-inline">
+						<!-- <label class="radio-inline">
 							<input type="radio" name="jenis_kelamin" value="Laki-laki" id="gender" disabled <?php if($us->jenis_kelamin == 'Laki-laki'){echo 'checked';} ?> >Laki-laki
 						</label>
 
 						<label class="radio-inline">
 							<input type="radio" name="jenis_kelamin" value="Laki-laki" " id="gender" disabled <?php if($us->jenis_kelamin == 'Perempuan'){echo 'checked';} ?> >Perempuan
-						</label>
-					
+						</label> -->
+					<p class="val">{{$us->jenis_kelamin}}</p>
+					<hr>
 				</div>
 
 				<div class="form-group">
 					<label for="profesi_id">Profesi</label>
-					<select class="form-control" name="profesi_id" id="profesi_id" disabled>
-						<option value="">---Pilih Profesi---</option>
-						<?php foreach ($profs as $prof): ?>
-							<option value="{{$prof->id_prof}}" 
-								<?php if($us->profesi_id == $prof->id_prof) echo 'selected'; ?> 
-								>{{$prof->nama_profesi}}</option>
-						<?php endforeach ?>
-					</select>
+					<p class="val">{{$profs->nama_profesi}}</p>
+					<hr>
 				</div>
 
 				<div class="form-group">
 					<label for="no_hp">No. HP</label>
-					<input class="form-control" type="text" name="no_hp" id="no_hp" value="{{$us->no_hp}}" readonly>
-					<?php if ($errors->has('no_hp')): ?>
-						<div class="alert alert-danger" role="alert" style="padding: 2px;">
-							{{$errors->first('no_hp') }}
-						</div>
-					<?php endif ?>
+					<!-- <input class="form-control" type="text" name="no_hp" id="no_hp" value="{{$us->no_hp}}" readonly> -->
+					<p class="val">{{$us->no_hp}}</p>
+					<hr>
 				</div>
 
 				<div class="form-group">
 					<label for="alamat_tinggal">Alamat Tinggal</label>
-					<input class="form-control" type="text" name="alamat_tinggal" id="alamat_tinggal" value="{{$us->alamat_tinggal}}" readonly>
-					<?php if ($errors->has('alamat_tinggal')): ?>
-						<div class="alert alert-danger" role="alert" style="padding: 2px;">
-							{{$errors->first('alamat_tinggal') }}
-						</div>
-					<?php endif ?>
+					<!-- <input class="form-control" type="text" name="alamat_tinggal" id="alamat_tinggal" value="{{$us->alamat_tinggal}}" readonly> -->
+					<p class="val">{{$us->alamat_tinggal}}</p>
+					<hr>
 				</div>
 
 			</div>
@@ -164,58 +152,46 @@
 
 				<div class="form-group">
 					<label for="alamat_asal">Alamat Asal</label>
-					<input class="form-control" type="text" name="alamat_asal" id="alamat_asal" value="{{$us->alamat_asal}}" readonly>
+					<!-- <input class="form-control" type="text" name="alamat_asal" id="alamat_asal" value="{{$us->alamat_asal}}" readonly> -->
+					<p class="val">{{$us->alamat_asal}}</p>
+					<hr>
 				</div>
 
 				<div class="form-group">
 					<label for="prov">Provinsi</label>
-					<select id="prov" class="form-control" name="id_prov_asal" disabled>
-						<option value="">---Pilih Provinsi Asal---</option>
-						<?php foreach ($provinsis as $prov): ?>
-							<option value="{{$prov->id}}"
-								<?php if($us->id_prov_asal == $prov->id) echo 'selected'; ?> 
-								>{{$prov->name}}</option>
-						<?php endforeach ?>
-					</select>
+					<p class="val">{{$provinsis->name}}</p>
+					<hr>
 				</div>
 
 				<div class="form-group">
 					<label for="kabupaten">Kota</label>
-					<select id="kabupaten" class="form-control" name="id_kab_asal" disabled>
-						<option value="">---Pilih Kota Asal---</option>
-						<?php foreach ($kabs as $kab): ?>
-							<option value="{{$kab->id}}"
-								<?php if($us->id_kab_asal == $kab->id) echo 'selected'; ?> 
-								>{{$kab->name}}</option>
-						<?php endforeach ?>
-					</select>
+					<p class="val">{{$kabs->name}}</p>
+					<hr>
 				</div>
 
 				<div class="form-group">
 					<label for="email">Email</label>
-					<input type="email" class="form-control" name="email" id="email" value="{{$us->email}}" readonly>
-					<?php if ($errors->has('email')): ?>
-						<div class="alert alert-danger" role="alert" style="padding: 2px;">
-							{{$errors->first('email') }}
-						</div>
-					<?php endif ?>
+					<!-- <input type="email" class="form-control" name="email" id="email" value="{{$us->email}}" readonly> -->
+					<p class="val">{{$us->email}}</p>
+					<hr>
 				</div>
 
 				<div class="form-group">
+					<label for="username">Username</label>
+					 <!-- <input type="text" class="form-control" name="username" id="password" value = "{{$us->username}}" readonly> -->
+					 <p class="val">{{$us->username}}</p>
+					<hr>
+				</div>
+
+				<!-- <div class="form-group">
 					<label for="password">Password</label>
 					 <input type="password" class="form-control" name="password" id="password" value = "" readonly>
-				</div>
+				</div> -->
 
 				<div class="form-group">
 					<label for="id_role">Role</label>
-					<select name="id_role" class="form-control" disabled>
-						<option value="">---Pilih Role---</option>
-						<?php foreach ($roles as $peran): ?>
-							<option value="{{$peran->id}}"
-								<?php if($us->id_role == $peran->id) echo 'selected'; ?> 
-								>{{$peran->nama_role}}</option>
-						<?php endforeach ?>
-					</select>
+					<p class="val">{{$roles->nama_role}}</p>
+					<hr>
 				</div>
 				<br>
 

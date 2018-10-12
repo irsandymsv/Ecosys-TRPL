@@ -11,6 +11,7 @@ use App\Models\profesi;
 use App\Models\province;
 use App\Models\regency;
 use App\Models\role;
+use App\Models\pengumuman;
 
 
 class adminController extends Controller
@@ -27,7 +28,12 @@ class adminController extends Controller
     {
     	$admin = user::findOrFail($id);
     	$peran = role::findOrFail($admin->id_role);
-    	return view('\admin\adminDataUser', ['ad'=>$admin, 'role' => $peran]);
+        $user = DB::table('users')
+                    ->join('roles', 'users.id_role','=','roles.id')
+                    ->join('profesi', 'users.profesi_id','=','profesi.id_prof')
+                    ->select('users.*', 'profesi.nama_profesi', 'roles.nama_role')
+                    ->get();
+    	return view('\admin\adminDataUser', ['ad'=>$admin, 'role' => $peran, 'list' => $user]);
     }
 
     public function perdes($id)
@@ -82,24 +88,26 @@ class adminController extends Controller
         $provinsi = province::all();
         $kab = regency::all();
         $roles = role::all();
+
         return view('\admin\dataUserBaru', ['ad'=>$admin, 'role' => $peran, 'profs' => $prof, 'provinsis' => $provinsi, 'kabs' => $kab, 'roles' => $roles]);
     }
 
     public function store(Request $req)
     {
         $this->validate($req,[
-            'nama' => 'required|string|max:50',
+            'nama' => 'required|string|max:50|regex:/^[a-zA-Z\s]+$/',
             'email' => 'required|string|email|max:40|unique:users',
-            'password' => 'required|string|min:6',
+            'username'  =>  'required|alpha_dash|max:30|unique:users',
+            'password' => 'required|string|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
             'jenis_kelamin' => 'required',
-            'alamat_asal' => 'required|string|max:100',
+            'alamat_asal' => 'required|string|min:5|max:100|not_regex:/^[\_~\-!@#\$%\^&*\(\)]/',
             'id_prov_asal' => 'required',
             'id_kab_asal' => 'required',
-            'alamat_tinggal' => 'required|string|max:100',
+            'alamat_tinggal' => 'required|string|min:5|max:100',
             'profesi_id' => 'required',
-            'tempat_lahir' => 'required|string|max:20|regex:/^[a-zA-Z ]+$/',
+            'tempat_lahir' => 'required|alpha|max:20|regex:/^[a-zA-Z ]+$/',
             'tanggal_lahir' => 'required',
-            'no_hp' => 'required|digits_between:1,12',
+            'no_hp' => 'required|unique:users|digits_between:1,12',
             'nik' => 'required|unique:users|digits:16',
             'id_role' => 'required'
         ]);
@@ -108,6 +116,7 @@ class adminController extends Controller
             'nama' => $req->nama,
             'password' => Hash::make($req->password),
             // 'password' => ($data->password),
+            'username' => $req->username,
             'jenis_kelamin' => $req->jenis_kelamin,
             'alamat_asal' => $req->alamat_asal,
             'id_prov_asal' => $req->id_prov_asal,
@@ -134,13 +143,22 @@ class adminController extends Controller
         $admin = user::findOrFail($id);
         $peran = role::findOrFail($admin->id_role);
 
-        $prof = profesi::all();
-        $provinsi = province::all();
-        $kab = regency::all();
-        $roles = role::all();
-
         $user = user::findOrFail($id2);
+
+        $prof = profesi::findOrFail($user->profesi_id);
+        $provinsi = province::findOrFail($user->id_prov_asal);
+        $kab = regency::findOrFail($user->id_kab_asal);
+        $roles = role::findOrFail($user->id_role);
+
         return  view('\admin\dataLengkap', ['ad'=>$admin, 'role' => $peran, 'us'=>$user, 'profs' => $prof, 'provinsis' => $provinsi, 'kabs' => $kab, 'roles' => $roles]);
+    }
+
+    public function delUser($id, $id2)
+    {
+        $del = User::findOrFail($id2);
+        $del->delete();   
+
+        return redirect('/admin/'.$id.'/data/perdes');
     }
 
     public function perdesDel($id, $id2)
@@ -185,8 +203,9 @@ class adminController extends Controller
     public function updateUser(Request $req, $id, $id2)
     {
         $this->validate($req,[
-            'nama' => 'required|string|max:50',
+            'nama' => 'required|string|max:50|regex:/^[a-zA-Z\s]+$/',
             'email' => 'required|string|email|max:40',
+            'username'  =>  'required|alpha_dash|max:30',
             // 'password' => 'required|string|min:6',
             'jenis_kelamin' => 'required',
             'alamat_asal' => 'required|string|max:100',
@@ -203,6 +222,7 @@ class adminController extends Controller
 
         $up = User::find($id2);
         $up->nama = $req->nama;
+        $up->username = $req->username;
         $up->jenis_kelamin = $req->jenis_kelamin;
         $up->alamat_asal = $req->alamat_asal;
         $up->id_prov_asal = $req->id_prov_asal;
@@ -218,13 +238,13 @@ class adminController extends Controller
         $up->save();
 
         $rl = role::findOrFail($req->id_role);
-        if ($rl->nama_role == "admin") {
+        if (strcasecmp($rl->nama_role, "admin") == 0) {
             return redirect('/admin/'.$id.'/data/admin/'.$id2);
 
-        }elseif ($rl->nama_role == "warga desa"){
+        }elseif (strcasecmp($rl->nama_role, "warga desa") == 0){
             return redirect('/admin/'.$id.'/data/warga/'.$id2);
 
-        }elseif ($rl->nama_role == "perangkat desa" || $rl->nama_role == "kepala Desa") {
+        }elseif (strcasecmp($rl->nama_role, "perangkat desa") == 0 || strcasecmp($rl->nama_role, "kepala desa") == 0) {
             return redirect('/admin/'.$id.'/data/perdes/'.$id2);
         }
 
@@ -242,7 +262,7 @@ class adminController extends Controller
     public function updatePass(Request $req, $id, $id2)
     {
         $this->validate($req,[
-            'password' => 'required|string|min:6'
+            'password' => 'required|string|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'
         ]);
 
         $pas = User::find($id2);
@@ -250,13 +270,13 @@ class adminController extends Controller
         $pas->save();
 
         $rl = role::findOrFail($pas->id_role);
-        if ($rl->nama_role == "admin") {
+        if (strcasecmp($rl->nama_role, "admin") == 0) {
             return redirect('/admin/'.$id.'/data/admin/'.$id2);
 
-        }elseif ($rl->nama_role == "warga desa"){
+        }elseif (strcasecmp($rl->nama_role, "warga desa") == 0){
             return redirect('/admin/'.$id.'/data/warga/'.$id2);
 
-        }elseif ($rl->nama_role == "perangkat desa" || $rl->nama_role == "kepala Desa") {
+        }elseif (strcasecmp($rl->nama_role, "perangkat desa") == 0 || strcasecmp($rl->nama_role, "kepala desa") == 0) {
             return redirect('/admin/'.$id.'/data/perdes/'.$id2);
         }
     }
@@ -266,15 +286,86 @@ class adminController extends Controller
         $us = User::findOrFail($id2);
         $rl = role::findOrFail($us->id_role);
 
-        if ($rl->nama_role == "admin") {
+        if (strcasecmp($rl->nama_role, "admin") == 0) {
             return redirect('/admin/'.$id.'/data/admin/'.$id2);
 
-        }elseif ($rl->nama_role == "warga desa"){
+        }elseif (strcasecmp($rl->nama_role, "warga desa") == 0){
             return redirect('/admin/'.$id.'/data/warga/'.$id2);
 
-        }elseif ($rl->nama_role == "perangkat desa" || $rl->nama_role == "kepala Desa") {
+        }elseif (strcasecmp($rl->nama_role, "perangkat desa") == 0 || strcasecmp($rl->nama_role, "kepala desa") == 0) {
             return redirect('/admin/'.$id.'/data/perdes/'.$id2);
         }
+    }
+
+    public function pengumuman($id)
+    {
+        $user = user::findOrFail($id);
+        $peran = role::findOrFail($user->id_role);
+
+        // $pengumuman = pengumuman::where('status','dipublikasi')->paginate(4);
+        $ann = pengumuman::all();
+        foreach ($ann as $key) {
+            $pengumuman = DB::table('pengumuman')
+                        ->join('users', 'pengumuman.id_penulis','=','users.id')
+                        ->where('status','dipublikasi')
+                        ->select('pengumuman.*','users.nama')
+                        ->orderBy('published_at', 'desc')
+                        ->paginate(4);    
+        }
+
+        $notifications = Auth::user()->unreadNotifications()->where('type','App\Notifications\notifPengumuman')->get();
+
+        // dd($notifications);
+        if ($notifications->isNotEmpty()) {
+            foreach ($notifications as $notif) {
+                $dt = $notif->data;
+                $dataId[] = $dt['ann_id'];
+                // dd($dt);
+            }    
+        }else {
+            $dataId = 0;
+        }
+
+        return view('\admin\adminAnnounce', ['role' => $peran, 'ad'=>$user, 'ann'=>$pengumuman, 'data'=>$dataId]);
+    }
+
+    public function lihatAnn($id, $id2)
+    {
+        $user = user::findOrFail($id);
+        $peran = role::findOrFail($user->id_role);
+
+        $pengumuman = DB::table('pengumuman')
+                        ->join('users', 'pengumuman.id_penulis','=','users.id')
+                        ->where('pengumuman.id','=',$id2)
+                        ->select('pengumuman.*', 'users.nama')
+                        ->first();
+
+        $pengubah = DB::table('pengumuman')
+                        ->join('users', 'pengumuman.id_pengubah','=','users.id')
+                        ->where('pengumuman.id','=',$id2)
+                        ->select('users.nama')
+                        ->first();
+
+        if (is_null($pengubah)) {
+            $ubah = $pengubah;
+        } else {
+            $ubah = $pengubah->nama;
+        }
+        // dd($ubah);
+
+        $notifications = Auth::user()->unreadNotifications()->where('type','App\Notifications\notifPengumuman')->get();
+
+        foreach ($notifications as $notif) {
+            $dt = $notif->data;
+            $dataId = $dt['ann_id'];
+            if ($dataId == $id2) {
+                $notif->markAsRead();
+                break;
+                // dd($notif);
+            }
+        }
+        
+        return view('\admin\adminDetailAnnounce', ['us'=>$user, 'role'=>$peran, 'ann'=>$pengumuman, 'ubah'=>$ubah]);
     }
 
     // public function tablePerdes($id)
