@@ -109,7 +109,10 @@ text-align: center;
 						<td>{{$key->nama_profesi}}</td>
 						<td style="text-align: center;">
 							<a href="/admin/{{$ad->id}}/data/edit/{{$key->id}}" class="btn btn-warning">Edit</a>
-							<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#myModal">Hapus</button>
+							@if($key->id != $ad->id)
+								<button class="btn btn-danger" id="del" type="button" data-toggle="modal" data-target="#myModal">Hapus</button>
+							@endif
+							
 							</td>
 						</tr>
 					<?php endforeach ?>

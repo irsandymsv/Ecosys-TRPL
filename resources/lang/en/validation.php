@@ -197,6 +197,9 @@ return [
         'id_role'       => [
             'required'  =>  'Harap pilih role',
         ],
+        'koordinat'     =>[
+            'required'  =>  'Harap isi semua kolom dan pilihan'
+        ]
 
     ],
 

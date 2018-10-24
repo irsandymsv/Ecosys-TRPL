@@ -128,7 +128,7 @@ Ecosys-Pengumuman
 		// 	}
 
 		 foreach ($ann as $key): ?>
-		 	<div id="cobalah"></div>
+		 	<!-- <div id="cobalah"></div> -->
 			<div class="col-sm-6" id="panel">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
@@ -158,7 +158,7 @@ Ecosys-Pengumuman
 						
 								{{substr($key->isi, 0, 90)}}...
 								<div class="kaki" style="text-align: right; margin-top: 20px;">
-									{{$key->published_at}} <br>
+									{{$key->created_at}} <br>
 									{{$key->nama}}
 								</div>
 							</div>

@@ -142,7 +142,7 @@
 					</label>
 
 					<label class="radio-inline">
-						<input type="radio" name="jenis_kelamin" value="Laki-laki" " id="gender">Perempuan
+						<input type="radio" name="jenis_kelamin" value="Perempuan" " id="gender">Perempuan
 					</label>
 					<?php if ($errors->has('jenis_kelamin')): ?>
 						<div class="alert alert-danger" role="alert" style="padding: 2px;">

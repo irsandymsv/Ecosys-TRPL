@@ -146,7 +146,7 @@
 					</label>
 
 					<label class="radio-inline">
-						<input type="radio" name="jenis_kelamin" value="Laki-laki" " id="gender"
+						<input type="radio" name="jenis_kelamin" value="Perempuan" " id="gender"
 							<?php if($user->jenis_kelamin == 'Perempuan'){echo 'checked';} ?>
 						>Perempuan
 					</label>

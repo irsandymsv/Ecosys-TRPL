@@ -36,7 +36,7 @@
         background-color: rgb(225,225,225);
         /*margin-left: 338px;*/
         /*position: initial;*/
-        /*padding: 1px 16px;*/
+        padding-bottom: 10px;
         min-height: 570px;
       }
 
@@ -84,6 +84,12 @@
 
       .badge{
         margin-left: 15px;
+        background-color: green;
+        font-size: 16px;
+      }
+
+      .badge.lap{
+        margin-left: 10px;
         background-color: rgb(255, 71, 26);
         font-size: 16px;
       }
@@ -134,15 +140,47 @@
 
               <a href="@yield('pengumuman')" style="font-size: 20px;"><span class="glyphicon glyphicon-bullhorn" style="margin-right: 20px; color: rgb(
               255, 204, 0);"></span>  pengumuman 
-                  <?php if (Auth()->User()->unreadNotifications->isEmpty()): ?>
+                  <?php if (Auth()->User()->unreadNotifications->where('type','App\Notifications\notifPengumuman')->isEmpty()): ?>
                     <span class="badge"></span>
                   <?php else: ?>
-                    <span class="badge">{{Auth()->User()->unreadNotifications->count()}}</span>
+                    <span class="badge">{{Auth()->User()->unreadNotifications->where('type','App\Notifications\notifPengumuman')->count()}}</span>
                   <?php endif ?>
               </a>
 
-              <a href="@yield('laporan')" style="font-size: 20px;"><span class="glyphicon glyphicon-list-alt" style="margin-right: 20px; color: rgb(
-              255, 204, 0);"></span>  Laporan</a>
+              <a href="@yield('Laporan')" style="font-size: 20px;"><span class="glyphicon glyphicon-list-alt" style="margin-right: 20px; color: rgb(
+              255, 204, 0);"></span>  Laporan
+                <?php if (Auth()->User()->unreadNotifications->where('type','App\Notifications\notifLaporan')->isEmpty()): ?>
+                    <span class="badge"></span>
+                  <?php else: ?>
+                    <span class="badge">{{Auth()->User()->unreadNotifications->where('type','App\Notifications\notifLaporan')->count()}}</span>
+
+                    <?php 
+                      $lapNotif = Auth()->User()->unreadNotifications->where('type','App\Notifications\notifLaporan')->all();
+                      $us = Auth::user();
+                      $jml = 0;
+                      foreach ($lapNotif as $key) {
+                        $isiData = $key->data;
+                        // $hasil = json_decode($isiData);
+                        $lapId = $isiData['lap_id'];
+
+                        $lap_prof = App\Models\laporan::find($lapId)->profesi()->get();
+                        if ($lap_prof->isNotEmpty()) {
+                          foreach ($lap_prof as $lp) {
+                            if ($lp->id_prof == $us->profesi_id) {
+                              $jml = $jml + 1;
+                            }
+                          }
+                        }
+                      }
+                    ?>
+                    <?php if ($jml == 0): ?>
+                        <span class="badge lap"></span>
+                    <?php else: ?>
+                      <span class="badge lap">{{$jml}}</span>
+                    <?php endif ?>
+                    
+                  <?php endif ?>
+              </a>
 
               <a href="@yield('statistika')" style="font-size: 20px;"><span class="glyphicon glyphicon-stats" style="margin-right: 20px; color: rgb(
               255, 204, 0);"></span>  Statistika</a>

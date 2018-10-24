@@ -60,6 +60,15 @@ Route::get('/admin/{id}/pengumuman/{id2}', 'adminController@lihatAnn');
 
 Route::post('/admin/{id}/pengumuman', 'pengumumanController@cariAnnPublish');
 
+Route::get('/admin/{id}/laporan', 'adminController@laporan');
+Route::get('/admin/{id}/laporan/baru', 'adminController@laporanBaru');
+Route::post('/admin/{id}/laporan/baru', 'adminController@createLaporan');
+Route::get('/admin/{id}/laporan/{id2}', 'adminController@lihatLaporan');
+Route::get('/admin/{id}/laporan/{id2}/ubah', 'adminController@editLaporan');
+Route::put('/admin/{id}/laporan/{id2}/update', 'adminController@updateLaporan');
+Route::delete('/admin/{id}/laporan/{id2}/delete', 'adminController@deleteLaporan');
+Route::put('/admin/{id}/laporan/{id2}/status', 'adminController@statusLaporan');
+
 
 Route::get('/perdes/{id}', 'perdesController@index');
 Route::get('/perdes/{id}/profil', 'perdesController@profil');
@@ -76,7 +85,16 @@ Route::put('/perdes/{id}/pengumuman/{id2}/update', 'perdesController@updateAnn')
 Route::put('/perdes/{id}/pengumuman/{id2}/status', 'perdesController@statusAnn');
 
 // Route::post('/perdes/{id}/pengumuman', 'pengumumanController@filterStat');
-Route::post('/perdes/{id}/pengumuman', 'perdesController@cariAnn');
+Route::post('/perdes/{id}/pengumuman', 'pengumumanController@cariAnn');
+
+Route::get('/perdes/{id}/laporan', 'perdesController@laporan');
+Route::get('/perdes/{id}/laporan/baru', 'perdesController@laporanBaru');
+Route::post('/perdes/{id}/laporan/baru', 'perdesController@createLaporan');
+Route::get('/perdes/{id}/laporan/{id2}/ubah', 'perdesController@editLaporan');
+Route::put('/perdes/{id}/laporan/{id2}/update', 'perdesController@updateLaporan');
+Route::get('/perdes/{id}/laporan/{id2}', 'perdesController@lihatLaporan');
+Route::delete('/perdes/{id}/laporan/{id2}/delete', 'perdesController@deleteLaporan');
+Route::put('/perdes/{id}/laporan/{id2}/status', 'perdesController@statusLaporan');
 
 
 Route::get('/warga/{id}', 'wargaController@index');
@@ -85,6 +103,15 @@ Route::get('/warga/{id}/pengumuman', 'wargaController@pengumuman');
 Route::get('/warga/{id}/pengumuman/{id2}', 'wargaController@lihatAnn');
 
 Route::post('/warga/{id}/pengumuman', 'pengumumanController@cariAnnPublish');
+
+Route::get('/warga/{id}/laporan', 'wargaController@laporan');
+Route::get('/warga/{id}/laporan/baru', 'wargaController@laporanBaru');
+Route::post('/warga/{id}/laporan/baru', 'wargaController@createLaporan');
+Route::get('/warga/{id}/laporan/{id2}', 'wargaController@lihatLaporan');
+Route::get('/warga/{id}/laporan/{id2}/ubah', 'wargaController@editLaporan');
+Route::put('/warga/{id}/laporan/{id2}/update', 'wargaController@updateLaporan');
+Route::delete('/warga/{id}/laporan/{id2}/delete', 'wargaController@deleteLaporan');
+Route::put('/warga/{id}/laporan/{id2}/status', 'wargaController@statusLaporan');
 
 
 Route::get('/kades/{id}', 'kadesController@index');
@@ -103,6 +130,14 @@ Route::put('/kades/{id}/pengumuman/{id2}/update', 'kadesController@updateAnn');
 
 Route::put('/kades/{id}/pengumuman/{id2}/status', 'kadesController@statusAnn');
 
+Route::get('/kades/{id}/laporan', 'kadesController@laporan');
+Route::get('/kades/{id}/laporan/baru', 'kadesController@laporanBaru');
+Route::post('/kades/{id}/laporan/baru', 'kadesController@createLaporan');
+Route::get('/kades/{id}/laporan/{id2}', 'kadesController@lihatLaporan');
+Route::get('/kades/{id}/laporan/{id2}/ubah', 'kadesController@editLaporan');
+Route::put('/kades/{id}/laporan/{id2}/update', 'kadesController@updateLaporan');
+Route::delete('/kades/{id}/laporan/{id2}/delete', 'kadesController@deleteLaporan');
+Route::put('/kades/{id}/laporan/{id2}/status', 'kadesController@statusLaporan');
 
 // Route::get('/pengumuman/{id}', 'pengumumanController@index');
 

@@ -2,7 +2,7 @@
 
 @section('beranda') /perdes/{{$us->id}} @endsection
 @section('pengumuman') /perdes/{{$us->id}}/pengumuman @endsection
-@section('laporan') # @endsection
+@section('Laporan') /perdes/{{$us->id}}/laporan @endsection
 @section('statistika') # @endsection
 
 @section('data profil')

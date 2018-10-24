@@ -2,7 +2,7 @@
 
 @section('beranda') /admin/{{$ad->id}} @endsection
 @section('pengumuman') /admin/{{$ad->id}}/pengumuman @endsection
-@section('laporan') # @endsection
+@section('Laporan') /admin/{{$ad->id}}/laporan @endsection
 @section('statistika') # @endsection
 
 @section('data profil')

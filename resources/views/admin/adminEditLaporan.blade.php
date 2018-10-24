@@ -1,4 +1,4 @@
-@extends ('layouts.detailPengumuman')
+@extends ('layouts.editLaporan')
 
 @section('beranda') /admin/{{$us->id}} @endsection
 @section('pengumuman') /admin/{{$us->id}}/pengumuman @endsection
@@ -10,19 +10,18 @@
 	255, 204, 0);"></span>Data Pengguna</a>
 @endsection
 
-<!-- @section('beranda')
-	/admin/{{$us->id}}
+@section('nav-laporan')
+	/admin/{{$us->id}}/laporan
 @endsection
 
-@section('pengumuman')
-	/admin/{{$us->id}}/pengumuman
+@section('nav-lihat')
+	/admin/{{$us->id}}/laporan/{{$laporan->id}}
 @endsection
 
-@section('profil')
-	<a href="/admin/{{$us->id}}/data" style="font-size: 20px;"><span class="fas fa-users" style="margin-right: 20px; color: rgb(
-	255, 204, 0);"></span>Data Pengguna</a>
-@endsection -->
+@section('edit')
+	/admin/{{$us->id}}/laporan/{{$laporan->id}}/update
+@endsection
 
-@section('nav1')
-	/admin/{{$us->id}}/pengumuman
+@section('batal')
+	/admin/{{$us->id}}/laporan/{{$laporan->id}}
 @endsection
