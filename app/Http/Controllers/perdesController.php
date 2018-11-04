@@ -475,4 +475,6 @@ class perdesController extends Controller
         return redirect('/perdes/'.$id.'/laporan/');
     }
 
+    
+
 }

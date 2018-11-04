@@ -92,7 +92,7 @@
 				<!-- <br> -->
 				<div class="form-group">
 					<label for="nama">Nama Lengkap</label>
-					<input class="form-control" type="text" name="nama" id="nama" value="{{old('nama')}}">
+					<input class="form-control" type="text" name="nama" id="nama" placeholder="Hanya masukkan abjad" value="{{old('nama')}}">
 					<?php if ($errors->has('nama')): ?>
 						<div class="alert alert-danger" role="alert" style="padding: 2px;">
 							{{$errors->first('nama') }}
@@ -101,7 +101,7 @@
 				</div>
 				<div class="form-group">
 					<label for="nik">NIK</label>
-					<input class="form-control" type="text" name="nik" id="nik" value="{{old('nik')}}">
+					<input class="form-control" type="text" name="nik" id="nik" placeholder="Masukkan tepat 16 digit angka" value="{{old('nik')}}">
 					<?php if ($errors->has('nik')): ?>
 						<div class="alert alert-danger" role="alert" style="padding: 2px;">
 							{{$errors->first('nik') }}
@@ -168,7 +168,7 @@
 
 				<div class="form-group">
 					<label for="no_hp">No. HP</label>
-					<input class="form-control" type="text" name="no_hp" id="no_hp" value="{{old('no_hp')}}">
+					<input class="form-control" type="text" name="no_hp" id="no_hp" placeholder="maksimal 12 digit angka" value="{{old('no_hp')}}">
 					<?php if ($errors->has('no_hp')): ?>
 						<div class="alert alert-danger" role="alert" style="padding: 2px;">
 							{{$errors->first('no_hp') }}
@@ -256,7 +256,7 @@
 				<div class="form-group">
 					<label for="password">Password</label>
 					<div class="input-group">
-						<input type="password" class="form-control" name="password" id="password">
+						<input type="password" class="form-control" name="password" id="password" placeholder="Harus terdiri dari huruf besar kecil dan angka">
 						<div class="input-group-addon"><button type="button" onmousedown="showPass()" onmouseup="hidePass()"><span class="glyphicon glyphicon-eye-open"></span></button>
 						</div>
 					</div>

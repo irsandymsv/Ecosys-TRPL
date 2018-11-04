@@ -69,6 +69,8 @@ Route::put('/admin/{id}/laporan/{id2}/update', 'adminController@updateLaporan');
 Route::delete('/admin/{id}/laporan/{id2}/delete', 'adminController@deleteLaporan');
 Route::put('/admin/{id}/laporan/{id2}/status', 'adminController@statusLaporan');
 
+Route::get('/admin/{id}/statistika', 'Controller@statistika');
+
 
 Route::get('/perdes/{id}', 'perdesController@index');
 Route::get('/perdes/{id}/profil', 'perdesController@profil');
@@ -96,6 +98,9 @@ Route::get('/perdes/{id}/laporan/{id2}', 'perdesController@lihatLaporan');
 Route::delete('/perdes/{id}/laporan/{id2}/delete', 'perdesController@deleteLaporan');
 Route::put('/perdes/{id}/laporan/{id2}/status', 'perdesController@statusLaporan');
 
+Route::get('/perdes/{id}/statistika', 'Controller@statistika');
+
+
 
 Route::get('/warga/{id}', 'wargaController@index');
 Route::get('/warga/{id}/profil', 'wargaController@profil');
@@ -112,6 +117,8 @@ Route::get('/warga/{id}/laporan/{id2}/ubah', 'wargaController@editLaporan');
 Route::put('/warga/{id}/laporan/{id2}/update', 'wargaController@updateLaporan');
 Route::delete('/warga/{id}/laporan/{id2}/delete', 'wargaController@deleteLaporan');
 Route::put('/warga/{id}/laporan/{id2}/status', 'wargaController@statusLaporan');
+
+Route::get('/warga/{id}/statistika', 'Controller@statistika');
 
 
 Route::get('/kades/{id}', 'kadesController@index');
@@ -139,7 +146,10 @@ Route::put('/kades/{id}/laporan/{id2}/update', 'kadesController@updateLaporan');
 Route::delete('/kades/{id}/laporan/{id2}/delete', 'kadesController@deleteLaporan');
 Route::put('/kades/{id}/laporan/{id2}/status', 'kadesController@statusLaporan');
 
-// Route::get('/pengumuman/{id}', 'pengumumanController@index');
+Route::get('/kades/{id}/statistika', 'Controller@statistika');
+
+
+Route::post('/statistika/data', 'Controller@getData');
 
 
 

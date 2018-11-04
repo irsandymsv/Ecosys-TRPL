@@ -129,76 +129,89 @@ return [
             'rule-name' => 'custom-message',
         ],
         'nama'          =>[
-            'required'  =>  'Harap isi kolom nama',
-            'max'       =>  'Maksimal 50 karakter',
-            'regex'     =>  'Harap hanya masukkan abjad',
+            'required'  =>  'Harap isi data dengan lengkap',
+            'max'       =>  'Data tidak valid, harap masukkan data dengan benar',
+            'regex'     =>  'Data tidak valid, harap masukkan data dengan benar',
         ],
         'username'      =>[
-            'required'  =>  'Harap isi kolom username',
-            'unique'    =>  'username sudah ada, mohon gunakan username lain',
-            'alpha_dash'=>  'Harap tidak menggunakan spasi dan simbol',
-            'max'       =>  'maksimal 30 karakter',
+            'required'  =>  'Harap isi data dengan lengkap',
+            'unique'    =>  'Data tidak valid, harap masukkan data dengan benar',
+            'alpha_dash'=>  'Data tidak valid, harap masukkan data dengan benar',
+            'max'       =>  'Data tidak valid, harap masukkan data dengan benar',
         ],
         'email'         =>[
-            'required'  =>  'Harap isi kolom email',
-            'email'     =>  'Harap masukkan sesuai format email',
-            'max'       =>  'Maksimal 40 karakter',
-            'unique'    =>  'email sudah ada, mohon gunakan email lain',
+            'required'  =>  'Harap isi data dengan lengkap',
+            'email'     =>  'Data tidak valid, harap masukkan data dengan benar',
+            'max'       =>  'Data tidak valid, harap masukkan data dengan benar',
+            'unique'    =>  'Data tidak valid, harap masukkan data dengan benar',
         ],
         'password'      =>[
-            'required'  =>  'Harap isi kolom password',
-            'min'       =>  'Minimal 6 karakter untuk password',
-            'regex'     =>  'password harus terdiri dari huruf besar kecl dan angka'
+            'required'  =>  'Harap isi data dengan lengkap',
+            'min'       =>  'Data tidak valid, harap masukkan data dengan benar',
+            'regex'     =>  'Data tidak valid, harap masukkan data dengan benar'
         ],
         'jenis_kelamin' =>[
-            'required'  =>  'Harap pilih jenis kelamin',
+            'required'  =>  'Harap isi data dengan lengkap',
         ],
         'alamat_asal'   => [
-            'required'  =>  'Harap isi kolom alamat asal',
-            'max'       =>  'Maksimal 100 karakter',
-            'min'       =>  'Minimal 5 karakter',
-            'not_regex' =>  'Harap tidak menggunakan simbol seperti ?>@!# dsb'
+            'required'  =>  'Harap isi data dengan lengkap',
+            'max'       =>  'Data tidak valid, harap masukkan data dengan benar',
+            'min'       =>  'Data tidak valid, harap masukkan data dengan benar',
+            'not_regex' =>  'Data tidak valid, harap masukkan data dengan benar'
         ],
         'id_prov_asal'  =>[
-            'required'  =>  'Harap pilih provinsi asal',
+            'required'  =>  'Harap isi data dengan lengkap',
         ],
         'id_kab_asal'   =>[
-          'required'    =>  'Harap pilih kota asal',  
+          'required'    =>  'Harap isi data dengan lengkap',  
         ],
         'alamat_tinggal'    =>[
-            'required'      =>  'Harap isi kolom alamat tinggal',
-            'max'           =>  'Maksimal 100 karakter',
-            'min'           =>  'Minimal 5 karakter',
+            'required'      =>  'Harap isi data dengan lengkap',
+            'max'           =>  'Data tidak valid, harap masukkan data dengan benar',
+            'min'           =>  'Data tidak valid, harap masukkan data dengan benar',
             
         ],
         'profesi_id'    =>[
-            'required'  =>  'Harap pilih profesi',
+            'required'  =>  'Harap isi data dengan lengkap',
         ],
         'tempat_lahir'  =>[
-            'required'  => 'Harap isi kolom tempat lahir',
-            'alpha'     => 'Harap hanya masukkan abjad',
-            'max'       => 'Maksimal 20 karakter',
-            'regex'     => 'Harap hanya masukkan abjad'
+            'required'  => 'Harap isi data dengan lengkap',
+            'alpha'     => 'Data tidak valid, harap masukkan data dengan benar',
+            'max'       => 'Data tidak valid, harap masukkan data dengan benar',
+            'regex'     => 'Data tidak valid, harap masukkan data dengan benar'
         ],
         'tanggal_lahir' =>[
-            'required'  => 'Harap pilih tanggal lahir',
+            'required'  => 'Harap isi data dengan lengkap',
         ],
         'no_hp'         =>[
-            'required'  =>  'Harap isi kolom nomor HP',
+            'required'  =>  'Harap isi data dengan lengkap',
             // 'numeric'   =>  'Harap hanya masukkan angka',
-            'digits_between'    =>  'Harap hanya masukkan angka, maksimal 12 digit',
-            'unique'    =>  'Nomor telah terdaftar, mohon masukkan nomor lain',
+            'digits_between'    =>  'Data tidak valid, harap masukkan data dengan benar',
+            'unique'    =>  'Data tidak valid, harap masukkan data dengan benar',
         ],
         'nik'           =>[
-            'required'  =>  'Harap isi kolom NIK',
-            'unique'    =>  'NIK telah terdaftar, mohon masukkan NIK lain',
-            'digits'    =>  'Harap isi dengan 16 digit angka',
+            'required'  =>  'Harap isi data dengan lengkap',
+            'unique'    =>  'Data tidak valid, harap masukkan data dengan benar',
+            'digits'    =>  'Data tidak valid, harap masukkan data dengan benar',
         ],
         'id_role'       => [
-            'required'  =>  'Harap pilih role',
+            'required'  =>  'Harap isi data dengan lengkap',
         ],
         'koordinat'     =>[
-            'required'  =>  'Harap isi semua kolom dan pilihan'
+            'required'  =>  'Harap isi semua kolom dan pilihan',
+        ],
+        'judul'         =>[
+            'required'  =>  'Harap isi data dengan lengkap',
+            'min'       =>  'Data tidak valid, harap masukkan data dengan benar',
+            'unique'    =>  'Data tidak valid, harap masukkan data dengan benar',
+        ],
+        'isi'           => [
+            'required'  =>  'Harap isi data dengan lengkap',
+            'min'       => 'Data tidak valid, harap masukkan data dengan benar',
+        ],
+        'tag'           =>[
+            'required'  =>  'Harap isi data dengan lengkap',
+            'prof'      =>  'Harap isi data dengan lengkap',
         ]
 
     ],

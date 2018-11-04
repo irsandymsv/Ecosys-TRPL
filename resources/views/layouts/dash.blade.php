@@ -182,7 +182,7 @@
                   <?php endif ?>
               </a>
 
-              <a href="@yield('statistika')" style="font-size: 20px;"><span class="glyphicon glyphicon-stats" style="margin-right: 20px; color: rgb(
+              <a href="@yield('Statistika')" style="font-size: 20px;"><span class="glyphicon glyphicon-stats" style="margin-right: 20px; color: rgb(
               255, 204, 0);"></span>  Statistika</a>
               
               @yield('data profil')
