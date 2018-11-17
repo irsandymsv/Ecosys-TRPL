@@ -25,8 +25,18 @@ class kadesController extends Controller
     {
     	$user = user::findOrFail($id);
     	$peran = role::findOrFail($user->id_role);
+
+        $tagAll = tag::all();
+        $thisMonth = Carbon::now()->month;
+        $thisYear = Carbon::now()->year;
+        $namaBln = array("Januari", "Februari", "Maret", "April", "Mei", "juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+        $kriminalitas = tag::where('nama','Kriminalitas')->first();
+
+        // $lap_month = laporan::where('created_at', '>' ,Carbon::now()->subMonth())->get();
+        $lap_month = $kriminalitas->laporan()->whereMonth('created_at', $thisMonth)->whereYear('created_at', $thisYear)->get();
+        
     	// dd($kades);
-    	return view('\kades\kadesPage', ['us'=>$user, 'role'=>$peran]);
+    	return view('\kades\kadesPage', ['us'=>$user, 'role'=>$peran, 'lap_month'=>$lap_month, "thisMonth"=>$thisMonth, "namaBln"=>$namaBln, "tagAll"=>$tagAll]);
     }
 
     public function profil($id)

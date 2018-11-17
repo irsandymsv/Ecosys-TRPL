@@ -72,6 +72,7 @@ Route::put('/admin/{id}/laporan/{id2}/status', 'adminController@statusLaporan');
 Route::get('/admin/{id}/statistika', 'Controller@statistika');
 
 
+
 Route::get('/perdes/{id}', 'perdesController@index');
 Route::get('/perdes/{id}/profil', 'perdesController@profil');
 
@@ -151,6 +152,7 @@ Route::get('/kades/{id}/statistika', 'Controller@statistika');
 
 Route::post('/statistika/data', 'Controller@getData');
 
+Route::post('/mapData', 'Controller@ajaxMap');
 
 
 // Route::get('/admin/{id}/data/tablePerdes', 'adminController@tablePerdes');

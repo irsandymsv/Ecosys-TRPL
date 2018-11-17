@@ -26,8 +26,18 @@ class adminController extends Controller
     {
     	$admin = user::findOrFail($id);
     	$peran = role::findOrFail($admin->id_role);
+
+        $tagAll = tag::all();
+        $thisMonth = Carbon::now()->month;
+        $thisYear = Carbon::now()->year;
+        $namaBln = array("Januari", "Februari", "Maret", "April", "Mei", "juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+        $kriminalitas = tag::where('nama','Kriminalitas')->first();
+
+        // $lap_month = laporan::where('created_at', '>' ,Carbon::now()->subMonth())->get();
+        $lap_month = $kriminalitas->laporan()->whereMonth('created_at', $thisMonth)->whereYear('created_at', $thisYear)->get();
+        
     	// dd($peran);
-    	return view('\admin\adminPage', ['ad'=>$admin, 'role' => $peran]);
+    	return view('\admin\adminPage', ['ad'=>$admin, 'role' => $peran, 'lap_month'=>$lap_month, "thisMonth"=>$thisMonth, "namaBln"=>$namaBln, "tagAll"=>$tagAll]);
     }
 
     public function dataUser($id)

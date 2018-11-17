@@ -103,33 +103,27 @@ class Controller extends BaseController
 
     }
 
-    public function getData(Request $req)
+    public function ajaxMap(Request $req)
     {
-    	$tag = $req->tag;
-    	$waktu = $req->waktu;
-    	$status = $req->status;
+        $kriminalitas = tag::where('nama','Kriminalitas')->first();
+        $kesehatan = tag::where('nama','Kesehatan')->first();
+        $pendidikan = tag::where('nama','Pendidikan')->first();
+        $thisYear = Carbon::now()->year;
 
-    	// if ($tag == "semua" && $waktu == "Minggu ini" &&  $status == "semua") {
-    		$hasil = array();
-    		// for ($i=0; $i > 8; $i++) { 
-    			// $hasil[i] = DB::table('laporan')
-    			// 			->join('tags',)
-    			// 			->select('*')
-    			// 			->where('created_at', Carbon::now()->subDays(i))
-    			// 			->where('','')
-    			// 			->get();
+        if ($req->tag == "Kriminalitas") {
+            $laporan = $kriminalitas->laporan()->whereMonth('created_at', $req->bulan)->whereYear('created_at', $thisYear)->get();
+        }
+        elseif ($req->tag == "Pendidikan") {
+            $laporan = $pendidikan->laporan()->whereMonth('created_at', $req->bulan)->whereYear('created_at', $thisYear)->get();   
+        }
+        elseif ($req->tag == "Kesehatan") {
+            $laporan = $kesehatan->laporan()->whereMonth('created_at', $req->bulan)->whereYear('created_at', $thisYear)->get(); 
+        }
+        elseif ($req->tag == "Semua") {
+            $laporan = laporan::whereMonth('created_at', $req->bulan)->whereYear('created_at', $thisYear)->get();
+        }
 
-    			// $hasil[i] = laporan::tags()
-    			// 					->where('nama', $tag)
-    			// 					->where('created_at', Carbon::now()->subDays(i))
-    			// 					->get();
-    		// }
-    		echo "5, 8, 1, 8, 10, 3, 9, 6";
-    		
-    	// }
-
-
-
+        echo $laporan;
     }
 
 

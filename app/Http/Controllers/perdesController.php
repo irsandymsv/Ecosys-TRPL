@@ -25,8 +25,41 @@ class perdesController extends Controller
     {
     	$user = user::findOrFail($id);
     	$peran = role::findOrFail($user->id_role);
+
+        $tagAll = tag::all();
+        $thisMonth = Carbon::now()->month;
+        $thisYear = Carbon::now()->year;
+        $namaBln = array("Januari", "Februari", "Maret", "April", "Mei", "juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+        $kriminalitas = tag::where('nama','Kriminalitas')->first();
+
+        // $lap_month = laporan::where('created_at', '>' ,Carbon::now()->subMonth())->get();
+        $lap_month = $kriminalitas->laporan()->whereMonth('created_at', $thisMonth)->whereYear('created_at', $thisYear)->get();
+
     	// dd($perdes);
-    	return view('\perdes\perdesPage', ['us'=>$user, 'role'=>$peran]);
+    	return view('\perdes\perdesPage', ['us'=>$user, 'role'=>$peran, 'lap_month'=>$lap_month, "thisMonth"=>$thisMonth, "namaBln"=>$namaBln, "tagAll"=>$tagAll]);
+    }
+
+    public function ajaxMap(Request $req)
+    {
+        $kriminalitas = tag::where('nama','Kriminalitas')->first();
+        $kesehatan = tag::where('nama','Kesehatan')->first();
+        $pendidikan = tag::where('nama','Pendidikan')->first();
+        $thisYear = Carbon::now()->year;
+
+        if (strcasecmp($req->tag, "kriminalitas") == 0) {
+            $laporan = $kriminalitas->laporan()->whereMonth('created_at', $req->bulan)->whereYear('created_at', $thisYear)->get();
+        }
+        elseif (strcasecmp($req->tag, "pendidikan") == 0) {
+            $laporan = $pendidikan->laporan()->whereMonth('created_at', $req->bulan)->whereYear('created_at', $thisYear)->get();   
+        }
+        elseif (strcasecmp($req->tag, "kesehatan") == 0) {
+            $laporan = $kesehatan->laporan()->whereMonth('created_at', $req->bulan)->whereYear('created_at', $thisYear)->get(); 
+        }
+        elseif (strcasecmp($req->tag, "semua") == 0) {
+            $laporan = laporan::whereMonth('created_at', $req->bulan)->whereYear('created_at', $thisYear)->get();
+        }
+
+        echo $laporan;
     }
 
     public function profil($id)
