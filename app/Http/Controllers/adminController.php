@@ -52,48 +52,48 @@ class adminController extends Controller
     	return view('\admin\adminDataUser', ['ad'=>$admin, 'role' => $peran, 'list' => $user]);
     }
 
-    public function perdes($id)
-    {
-    	$admin = user::findOrFail($id);
-    	$peran = role::findOrFail($admin->id_role);
-    	$perangkat = DB::table('users')
-    					->join('roles', 'users.id_role','=','roles.id')
-    					->join('profesi', 'users.profesi_id','=','profesi.id_prof')
-    					->select('users.*', 'profesi.nama_profesi')
-    					->where('roles.nama_role','=', 'perangkat desa')
-                        ->orWhere('roles.nama_role','=', 'kepala desa')
-    					->get();
-    	// dd($perangkat);
-    	return view('\admin\dataPerdes', ['ad'=>$admin, 'role' => $peran, 'list' => $perangkat]);
-    }
+    // public function perdes($id)
+    // {
+    // 	$admin = user::findOrFail($id);
+    // 	$peran = role::findOrFail($admin->id_role);
+    // 	$perangkat = DB::table('users')
+    // 					->join('roles', 'users.id_role','=','roles.id')
+    // 					->join('profesi', 'users.profesi_id','=','profesi.id_prof')
+    // 					->select('users.*', 'profesi.nama_profesi')
+    // 					->where('roles.nama_role','=', 'perangkat desa')
+    //                     ->orWhere('roles.nama_role','=', 'kepala desa')
+    // 					->get();
+    // 	// dd($perangkat);
+    // 	return view('\admin\dataPerdes', ['ad'=>$admin, 'role' => $peran, 'list' => $perangkat]);
+    // }
 
-    public function warga($id)
-    {
-        $admin = user::findOrFail($id);
-        $peran = role::findOrFail($admin->id_role);
-        $warga = DB::table('users')
-                        ->join('roles', 'users.id_role','=','roles.id')
-                        ->join('profesi', 'users.profesi_id','=','profesi.id_prof')
-                        ->select('users.*', 'profesi.nama_profesi')
-                        ->where('roles.nama_role','=', 'warga desa')
-                        ->get();
-        // dd($perangkat);
-        return view('\admin\dataWarga', ['ad'=>$admin, 'role' => $peran, 'list' => $warga]);
-    }
+    // public function warga($id)
+    // {
+    //     $admin = user::findOrFail($id);
+    //     $peran = role::findOrFail($admin->id_role);
+    //     $warga = DB::table('users')
+    //                     ->join('roles', 'users.id_role','=','roles.id')
+    //                     ->join('profesi', 'users.profesi_id','=','profesi.id_prof')
+    //                     ->select('users.*', 'profesi.nama_profesi')
+    //                     ->where('roles.nama_role','=', 'warga desa')
+    //                     ->get();
+    //     // dd($perangkat);
+    //     return view('\admin\dataWarga', ['ad'=>$admin, 'role' => $peran, 'list' => $warga]);
+    // }
 
-    public function admin($id)
-    {
-        $admin = user::findOrFail($id);
-        $peran = role::findOrFail($admin->id_role);
-        $dataAdm = DB::table('users')
-                        ->join('roles', 'users.id_role','=','roles.id')
-                        ->join('profesi', 'users.profesi_id','=','profesi.id_prof')
-                        ->select('users.*', 'profesi.nama_profesi')
-                        ->where('roles.nama_role','=', 'admin')
-                        ->get();
-        // dd($perangkat);
-        return view('\admin\dataAdmin', ['ad'=>$admin, 'role' => $peran, 'list' => $dataAdm]);
-    }
+    // public function admin($id)
+    // {
+    //     $admin = user::findOrFail($id);
+    //     $peran = role::findOrFail($admin->id_role);
+    //     $dataAdm = DB::table('users')
+    //                     ->join('roles', 'users.id_role','=','roles.id')
+    //                     ->join('profesi', 'users.profesi_id','=','profesi.id_prof')
+    //                     ->select('users.*', 'profesi.nama_profesi')
+    //                     ->where('roles.nama_role','=', 'admin')
+    //                     ->get();
+    //     // dd($perangkat);
+    //     return view('\admin\dataAdmin', ['ad'=>$admin, 'role' => $peran, 'list' => $dataAdm]);
+    // }
 
     public function new($id)
     {
@@ -183,29 +183,29 @@ class adminController extends Controller
         return redirect('/admin/'.$id.'/data');
     }
 
-    public function perdesDel($id, $id2)
-    {
-        $del = User::findOrFail($id2);
-        $del->delete();   
+    // public function perdesDel($id, $id2)
+    // {
+    //     $del = User::findOrFail($id2);
+    //     $del->delete();   
 
-        return redirect('/admin/'.$id.'/data/perdes');
-    }
+    //     return redirect('/admin/'.$id.'/data/perdes');
+    // }
 
-    public function wargaDel($id, $id2)
-    {
-        $del = User::findOrFail($id2);
-        $del->delete();   
+    // public function wargaDel($id, $id2)
+    // {
+    //     $del = User::findOrFail($id2);
+    //     $del->delete();   
 
-        return redirect('/admin/'.$id.'/data/warga');
-    }
+    //     return redirect('/admin/'.$id.'/data/warga');
+    // }
 
-    public function adminDel($id, $id2)
-    {
-        $del = User::findOrFail($id2);
-        $del->delete();   
+    // public function adminDel($id, $id2)
+    // {
+    //     $del = User::findOrFail($id2);
+    //     $del->delete();   
 
-        return redirect('/admin/'.$id.'/data/admin');
-    }
+    //     return redirect('/admin/'.$id.'/data/admin');
+    // }
 
     public function editUser($id, $id2)
     {

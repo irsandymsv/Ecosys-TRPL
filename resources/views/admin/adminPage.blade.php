@@ -117,7 +117,7 @@
 
 		makeMarker(<?php echo $lap_month ?>);
 
-		jQuery(document).ready(function($) {
+		jQuery(document).ready(function() {
 			$('#pilihBln,#pilihTag').change(function(event) {
 				var bln = $('#pilihBln').val();
 				var tag = $('#pilihTag').val();
