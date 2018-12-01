@@ -48,6 +48,7 @@ class adminController extends Controller
                     ->join('roles', 'users.id_role','=','roles.id')
                     ->join('profesi', 'users.profesi_id','=','profesi.id_prof')
                     ->select('users.*', 'profesi.nama_profesi', 'roles.nama_role')
+                    ->orderBy('users.created_at', 'desc')
                     ->get();
     	return view('\admin\adminDataUser', ['ad'=>$admin, 'role' => $peran, 'list' => $user]);
     }
@@ -162,9 +163,11 @@ class adminController extends Controller
         $user = user::findOrFail($id2);
 
         $prof = profesi::findOrFail($user->profesi_id);
-        $provinsi = province::findOrFail($user->id_prov_asal);
         $kab = regency::findOrFail($user->id_kab_asal);
+        $provinsi = province::findOrFail($user->id_prov_asal);
         $roles = role::findOrFail($user->id_role);
+        
+        // $provinsi = province::findOrFail($kab->province_id);
 
         return  view('\admin\dataLengkap', ['ad'=>$admin, 'role' => $peran, 'us'=>$user, 'profs' => $prof, 'provinsis' => $provinsi, 'kabs' => $kab, 'roles' => $roles]);
     }

@@ -14,6 +14,8 @@ use App\Models\role;
 use App\Models\laporan;
 use App\Models\tag;
 use App\Models\profesi;
+use App\Models\province;
+use App\Models\regency;
 
 class Controller extends BaseController
 {
@@ -124,6 +126,24 @@ class Controller extends BaseController
         }
 
         echo $laporan;
+    }
+
+
+    public function ajaxProvKab(Request $req)
+    {
+        if ($req->id_prov != "") {
+            $kab = regency::where("province_id", $req->id_prov)->get();
+            foreach ($kab as $key) {
+                echo "<option value=".$key->id.">".$key->name."</option>";
+            }
+        }
+        else{
+            $kab = regency::all();
+            echo '<option value="">---Pilih Kota Asal---</option>';
+            foreach ($kab as $key) {
+                echo "<option value=".$key->id.">".$key->name."</option>";
+            }
+        }
     }
 
 

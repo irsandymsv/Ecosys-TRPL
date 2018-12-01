@@ -1,5 +1,9 @@
 @extends ('layouts.admin')
 
+@section('meta')
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
 @section('judul')
 	Ecosys-Buat Data Pengguna
 @endsection
@@ -138,11 +142,11 @@
 				<div class="form-group">
 					<label for="gender">Jenis Kelamin</label><br>
 					<label class="radio-inline">
-						<input type="radio" name="jenis_kelamin" value="Laki-laki" id="gender">Laki-laki
+						<input type="radio" name="jenis_kelamin" value="Laki-laki">Laki-laki
 					</label>
 
 					<label class="radio-inline">
-						<input type="radio" name="jenis_kelamin" value="Perempuan" " id="gender">Perempuan
+						<input type="radio" name="jenis_kelamin" value="Perempuan">Perempuan
 					</label>
 					<?php if ($errors->has('jenis_kelamin')): ?>
 						<div class="alert alert-danger" role="alert" style="padding: 2px;">
@@ -352,6 +356,40 @@
 				return false;
 			}
 		});
+
+		$('#prov').change(function(event) {
+			var id_prov = $(this).val();
+			console.log('id_prov= '+id_prov);
+
+			$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+
+			$.ajax({
+				url: '/ajaxProv',
+				type: 'POST',
+				// dataType: 'json',
+				data: {'id_prov': id_prov,
+						_token: '{{csrf_token()}}'
+					},
+			})
+			.done(function(hasil) {
+				console.log("success");
+				$('#kabupaten').html(hasil);
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});	
+		});
+		
+		
+
+
 	});
 </script>
 	

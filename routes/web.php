@@ -150,8 +150,8 @@ Route::put('/kades/{id}/laporan/{id2}/status', 'kadesController@statusLaporan');
 Route::get('/kades/{id}/statistika', 'Controller@statistika');
 
 
+Route::post('/ajaxProv', 'Controller@ajaxProvKab');
 Route::post('/statistika/data', 'Controller@getData');
-
 Route::post('/mapData', 'Controller@ajaxMap');
 
 
